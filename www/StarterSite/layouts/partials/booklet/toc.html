@@ -1,0 +1,39 @@
+{{/* Cross-page validation: duplicate page_number check */}}
+{{ $seen := dict }}
+{{ range .Pages }}
+  {{ $pn := printf "%v" (.Params.page_number | default "") }}
+  {{ if $pn }}
+    {{ $prev := index $seen $pn }}
+    {{ if $prev }}
+      {{ errorf "duplicate page_number %q in handbook section: %s and %s" $pn $prev.File.Path .File.Path }}
+    {{ else }}
+      {{ $seen = merge $seen (dict $pn .) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="booklet-viewport">
+  <article class="booklet-page"{{ with .Params.page_number }} id="page-{{ . }}"{{ end }}>
+    {{ partial "booklet/running-header.html" (dict "section" .Params.section "chapter" "Contents") }}
+    <div class="booklet-toc">
+      <h1 class="booklet-toc__title">{{ .Title }}</h1>
+      {{ with .Content }}
+      <div class="booklet-content">
+        {{ . }}
+      </div>
+      {{ end }}
+      <ol class="booklet-toc__list">
+        {{ range .Pages }}
+        <li class="booklet-toc__entry">
+          <a href="{{ .RelPermalink }}">
+            {{ with .Params.short_title }}{{ . }}{{ else }}{{ .Title }}{{ end }}
+          </a>
+          <span class="booklet-toc__entry-num">{{ .Params.page_number }}</span>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+    {{ partial "booklet/folio.html" . }}
+    {{ partial "booklet/page-footer.html" . }}
+  </article>
+</div>

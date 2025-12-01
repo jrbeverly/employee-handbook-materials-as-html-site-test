@@ -1,0 +1,108 @@
+/* Handbook base styles.
+ *
+ * Every value references a design token from tokens.css. Magic values are
+ * a regression — add a token if you need a new value.
+ *
+ * This file owns the root document defaults; page geometry and layout forms
+ * live in layouts.css.
+ */
+
+/* ── Document root ──────────────────────────────────────────────── */
+
+body {
+  margin: 0;
+  background: var(--color-paper-dark);
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+}
+
+/* ── Shared typography defaults ─────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-ink);
+  font-family: var(--font-text);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+p {
+  margin: 0 0 var(--baseline);
+}
+
+/* ── Focus visible ───────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+/* ── Skip link ───────────────────────────────────────────────── */
+
+.skip-link {
+  background: var(--color-accent);
+  color: var(--color-paper);
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  left: 0;
+  padding: 0.5em 1em;
+  position: absolute;
+  top: -100%;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── High contrast / forced-colors ────────────────────────────── */
+
+@media (forced-colors: active) {
+  .booklet-sequential-nav__prev,
+  .booklet-sequential-nav__next,
+  .booklet-return-toc,
+  .booklet-toc__entry a,
+  .booklet-page a,
+  .booklet-spread__page a {
+    text-decoration: underline;
+  }
+
+  .booklet-page,
+  .booklet-spread__page {
+    border: 1px solid CanvasText;
+  }
+
+  .booklet-full-bleed svg {
+    forced-color-adjust: auto;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .booklet-running-header,
+  .booklet-folio,
+  .booklet-chapter-opener__number,
+  .booklet-chapter-opener__description,
+  .booklet-cover__subtitle,
+  .booklet-full-bleed__caption,
+  .booklet-return-toc {
+    color: var(--color-ink);
+  }
+
+  .booklet-marginalia--discovery {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,6 @@
+<footer class="booklet-page-footer">
+  {{ partial "booklet/sequential-nav.html" . }}
+  {{ if .CurrentSection }}
+  <a href="{{ .CurrentSection.RelPermalink }}" class="booklet-return-toc">Contents</a>
+  {{ end }}
+</footer>

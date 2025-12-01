@@ -1,0 +1,38 @@
+{{/*
+  Illustration slot — renders illustrations referenced in front matter.
+  Reads the `illustrations` array from .Params and renders each as
+  inline SVG from assets/illustrations/.
+
+  Front matter schema per item:
+    name:    string  — SVG filename without extension (required)
+    alt:     string  — meaningful alt text (required)
+    caption: string  — optional figure caption
+
+  Accessible: wraps each illustration in <figure> with aria-label and
+  optional <figcaption>. SVG files must carry role="img" and aria-label
+  on the root <svg> element.
+*/}}
+
+{{ $illustrations := .Params.illustrations | default slice }}
+{{ if $illustrations }}
+  {{ range $i, $ill := $illustrations }}
+    {{ $name := index $ill "name" | default "" }}
+    {{ $alt := index $ill "alt" | default "" }}
+    {{ $caption := index $ill "caption" | default "" }}
+
+    {{ if $name }}
+      {{ $svgPath := printf "illustrations/%s.svg" $name }}
+      {{ $svg := resources.Get $svgPath }}
+      {{ if $svg }}
+        <figure class="booklet-illustration" role="img" aria-label="{{ $alt }}">
+          {{ $svg.Content | safeHTML }}
+          {{ if $caption }}
+          <figcaption class="booklet-illustration__caption">{{ $caption | markdownify }}</figcaption>
+          {{ end }}
+        </figure>
+      {{ else }}
+        {{ errorf "illustration %q not found at assets/%s (referenced in %s)" $name $svgPath $.File.Path }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

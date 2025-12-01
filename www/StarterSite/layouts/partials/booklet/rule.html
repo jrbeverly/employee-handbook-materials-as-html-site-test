@@ -1,0 +1,5 @@
+{{ $ornament := .ornament | default "" }}
+<hr class="booklet-rule" />
+{{ if $ornament }}
+<div class="booklet-ornament">{{ $ornament }}</div>
+{{ end }}

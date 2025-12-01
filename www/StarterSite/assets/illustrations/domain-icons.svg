@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 360 120"
+     role="img" aria-label="Three domain emblems: Product (diamond), Craft (interlocking circles), and People (overlapping rings)">
+  <!-- Product: Diamond shape -->
+  <rect x="30" y="20" width="55" height="55" rx="3"
+        fill="none" stroke="var(--color-diagram-stroke)" stroke-width="1"
+        transform="rotate(45, 57, 47)" />
+  <text x="57" y="51"
+        font-family="Crimson Pro, Georgia, serif" font-size="9"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">Product</text>
+
+  <!-- Craft: Three interlocking tool-like nodes -->
+  <circle cx="150" cy="38" r="12"
+          fill="none" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <circle cx="166" cy="52" r="12"
+          fill="none" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <circle cx="134" cy="52" r="12"
+          fill="none" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <line x1="150" y1="38" x2="166" y2="52"
+        stroke="var(--color-diagram-stroke)" stroke-width="0.75" />
+  <line x1="150" y1="38" x2="134" y2="52"
+        stroke="var(--color-diagram-stroke)" stroke-width="0.75" />
+  <line x1="166" y1="52" x2="134" y2="52"
+        stroke="var(--color-diagram-stroke)" stroke-width="0.75" />
+  <text x="150" y="82"
+        font-family="Crimson Pro, Georgia, serif" font-size="9"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">Craft</text>
+
+  <!-- People: Overlapping circles -->
+  <circle cx="250" cy="42" r="15"
+          fill="var(--color-diagram-fill)" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <circle cx="265" cy="52" r="15"
+          fill="var(--color-diagram-fill)" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <circle cx="240" cy="52" r="15"
+          fill="var(--color-diagram-fill)" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <text x="252" y="82"
+        font-family="Crimson Pro, Georgia, serif" font-size="9"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">People</text>
+
+  <!-- Domain labels below -->
+  <text x="57" y="105"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="middle">What we build</text>
+  <text x="150" y="105"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="middle">How we work</text>
+  <text x="252" y="105"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="middle">How we grow</text>
+</svg>

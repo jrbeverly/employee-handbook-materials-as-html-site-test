@@ -1,0 +1,10 @@
+{{ $items := .items | default slice }}
+{{ if $items }}
+<aside class="booklet-marginalia-column" aria-label="Marginal notes">
+  {{ range $items }}
+  <div class="booklet-marginalia{{ if .discovery }} booklet-marginalia--discovery{{ end }}">
+    {{ .text | markdownify }}
+  </div>
+  {{ end }}
+</aside>
+{{ end }}

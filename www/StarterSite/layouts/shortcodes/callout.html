@@ -1,0 +1,4 @@
+{{ $text := trim .Inner " \n\r\t" }}
+{{ if $text }}
+  {{ partial "booklet/callout.html" (dict "text" $text) }}
+{{ end }}

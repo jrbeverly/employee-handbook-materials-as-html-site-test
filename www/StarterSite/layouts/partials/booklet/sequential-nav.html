@@ -1,0 +1,82 @@
+{{/*
+  Sequential navigation: prev/next page links in booklet-native format.
+
+  Handles two cases:
+  - Section index (TOC): prev = site home (cover), next = first child by weight
+  - Regular page: prev/next from weighted siblings; first page prev = TOC; last page next = TOC
+
+  Link format per navigation model: "← p. N — Title" / "Title — p. N →"
+*/}}
+
+{{ $page := . }}
+{{ $tocURL := "" }}
+{{ $prevURL := "" }}
+{{ $nextURL := "" }}
+{{ $prevLabel := "" }}
+{{ $nextLabel := "" }}
+
+{{ if $page.IsSection }}
+  {{/* TOC page */}}
+  {{ $tocURL = $page.RelPermalink }}
+  {{ with site.Home }}
+    {{ $prevURL = .RelPermalink }}
+    {{ $prevLabel = "← Cover" }}
+  {{ end }}
+  {{ $children := $page.Pages }}
+  {{ with index $children 0 }}
+    {{ $nextURL = .RelPermalink }}
+    {{ $nextLabel = printf "%s →" (or .Params.short_title .Title) }}
+  {{ end }}
+
+{{ else }}
+  {{/* Regular page within a section */}}
+  {{ $section := $page.CurrentSection }}
+  {{ $tocURL = $section.RelPermalink }}
+  {{ $ordered := $section.Pages }}
+
+  {{ $idx := -1 }}
+  {{ range $i, $p := $ordered }}
+    {{ if eq $p.RelPermalink $page.RelPermalink }}
+      {{ $idx = $i }}
+    {{ end }}
+  {{ end }}
+
+  {{ if ge $idx 0 }}
+    {{ if gt $idx 0 }}
+      {{ $p := index $ordered (sub $idx 1) }}
+      {{ $prevURL = $p.RelPermalink }}
+      {{ $n := $p.Params.page_number | default "" }}
+      {{ $t := or $p.Params.short_title $p.Title }}
+      {{ $prevLabel = printf "← %v — %s" $n $t }}
+    {{ else }}
+      {{ $prevURL = $tocURL }}
+      {{ $prevLabel = "← Contents" }}
+    {{ end }}
+
+    {{ if lt $idx (sub (len $ordered) 1) }}
+      {{ $p := index $ordered (add $idx 1) }}
+      {{ $nextURL = $p.RelPermalink }}
+      {{ $n := $p.Params.page_number | default "" }}
+      {{ $t := or $p.Params.short_title $p.Title }}
+      {{ $nextLabel = printf "%s — %v →" $t $n }}
+    {{ else }}
+      {{ $nextURL = $tocURL }}
+      {{ $nextLabel = "Contents →" }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if or $prevURL $nextURL }}
+<nav class="booklet-sequential-nav" aria-label="Page navigation">
+  {{ if $prevURL }}
+  <a href="{{ $prevURL }}" class="booklet-sequential-nav__prev" rel="prev">{{ $prevLabel }}</a>
+  {{ else }}
+  <span></span>
+  {{ end }}
+  {{ if $nextURL }}
+  <a href="{{ $nextURL }}" class="booklet-sequential-nav__next" rel="next">{{ $nextLabel }}</a>
+  {{ else }}
+  <span></span>
+  {{ end }}
+</nav>
+{{ end }}

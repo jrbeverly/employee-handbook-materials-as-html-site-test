@@ -1,0 +1,25 @@
+<div class="booklet-viewport">
+  <article class="booklet-page booklet-page--full-bleed"{{ with .Params.page_number }} id="page-{{ . }}"{{ end }}>
+    <div class="booklet-full-bleed">
+      {{ partial "booklet/illustration-slot.html" . }}
+      {{ .Content }}
+    </div>
+    {{ with .Params.caption }}
+    <p class="booklet-full-bleed__caption">{{ . }}</p>
+    {{ end }}
+    {{ partial "booklet/folio.html" . }}
+    {{ partial "booklet/page-footer.html" . }}
+  </article>
+  {{ with .Params.diagram_details }}
+  <div class="booklet-diagram-details">
+    {{ range . }}
+    <details id="{{ .id | urlize }}">
+      <summary>{{ .label }}</summary>
+      <div class="booklet-diagram-details__content">
+        {{ .description | markdownify }}
+      </div>
+    </details>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>

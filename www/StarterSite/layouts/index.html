@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{ partial "booklet/validate.html" . }}
+{{ $pageForm := .Params.page_form | default "single-page" }}
+{{ $partialPath := printf "booklet/%s.html" $pageForm }}
+{{ if templates.Exists (printf "partials/%s" $partialPath) }}
+  {{ partial $partialPath . }}
+{{ else }}
+  {{ partial "booklet/single-page.html" . }}
+{{ end }}
+{{ end }}

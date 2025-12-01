@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 400 240"
+     role="img" aria-label="Compass rose with three directional arrows labeled Product, Craft, and People, radiating from a central wayfinding mark">
+  <!-- Compass circle -->
+  <circle cx="200" cy="120" r="95"
+          fill="none"
+          stroke="var(--color-diagram-stroke)"
+          stroke-width="1" />
+  <circle cx="200" cy="120" r="90"
+          fill="var(--color-diagram-fill)"
+          stroke="none" />
+
+  <!-- Cardinal ticks -->
+  <line x1="200" y1="28"  x2="200" y2="42"  stroke="var(--color-diagram-stroke)" stroke-width="1.5" />
+  <line x1="200" y1="198" x2="200" y2="212" stroke="var(--color-diagram-stroke)" stroke-width="1.5" />
+  <line x1="108" y1="120" x2="122" y2="120" stroke="var(--color-diagram-stroke)" stroke-width="1.5" />
+  <line x1="278" y1="120" x2="292" y2="120" stroke="var(--color-diagram-stroke)" stroke-width="1.5" />
+
+  <!-- Arrow: Product (up-right) -->
+  <line x1="200" y1="120" x2="268" y2="62"
+        stroke="var(--color-ink)" stroke-width="1.5" />
+  <polygon points="268,62 258,68 264,56"
+           fill="var(--color-ink)" stroke="none" />
+
+  <!-- Arrow: Craft (down) -->
+  <line x1="200" y1="120" x2="200" y2="182"
+        stroke="var(--color-ink)" stroke-width="1.5" />
+  <polygon points="200,182 190,174 210,174"
+           fill="var(--color-ink)" stroke="none" />
+
+  <!-- Arrow: People (up-left) -->
+  <line x1="200" y1="120" x2="132" y2="62"
+        stroke="var(--color-ink)" stroke-width="1.5" />
+  <polygon points="132,62 136,74 126,66"
+           fill="var(--color-ink)" stroke="none" />
+
+  <!-- Center wayfinding mark -->
+  <circle cx="200" cy="120" r="6"
+          fill="var(--color-paper)"
+          stroke="var(--color-ink)" stroke-width="1.5" />
+  <circle cx="200" cy="120" r="2"
+          fill="var(--color-ink)" stroke="none" />
+
+  <!-- Domain labels -->
+  <text x="278" y="56"
+        font-family="Crimson Pro, Georgia, serif" font-size="14"
+        fill="var(--color-ink)" text-anchor="start" font-weight="600">Product</text>
+  <text x="200" y="200"
+        font-family="Crimson Pro, Georgia, serif" font-size="14"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">Craft</text>
+  <text x="124" y="56"
+        font-family="Crimson Pro, Georgia, serif" font-size="14"
+        fill="var(--color-ink)" text-anchor="end" font-weight="600">People</text>
+
+  <!-- Subtle domain subtitles -->
+  <text x="278" y="72"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="start">What we build</text>
+  <text x="200" y="214"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="middle">How we work</text>
+  <text x="124" y="72"
+        font-family="Crimson Pro, Georgia, serif" font-size="11"
+        fill="var(--color-ink-muted)" text-anchor="end">How we grow</text>
+</svg>

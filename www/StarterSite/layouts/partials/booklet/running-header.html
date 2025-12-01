@@ -1,0 +1,8 @@
+{{ $section := .section | default "" }}
+{{ $chapter := .chapter | default "" }}
+{{ if or $section $chapter }}
+<header class="booklet-running-header">
+  <span class="booklet-running-header__left">{{ $section }}</span>
+  <span class="booklet-running-header__right">{{ $chapter }}</span>
+</header>
+{{ end }}

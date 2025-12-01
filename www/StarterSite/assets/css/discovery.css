@@ -1,0 +1,138 @@
+/* Signature discovery moments.
+ *
+ * Three restrained, interactive moments that reward attention. Every value
+ * references a design token from tokens.css. Magic values are a regression.
+ *
+ * All moments degrade gracefully: content is visible and readable without
+ * hover, without JavaScript, and when prefers-reduced-motion is set.
+ */
+
+/* ── Hover marginalia reveal ─────────────────────────────────── */
+
+/* A marginal note tilted as if penciled in by hand. Hovering straightens
+   it — the digital equivalent of noticing a handwritten annotation. */
+.booklet-marginalia--discovery {
+  opacity: 0.78;
+  transform: rotate(2.5deg);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.booklet-marginalia--discovery:hover {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* ── Chapter-end vignette ────────────────────────────────────── */
+
+/* A closing stamp at the end of a chapter. Revealed by IntersectionObserver
+   when it scrolls into view; static without JavaScript. */
+.booklet-chapter-end {
+  align-items: center;
+  border-top: var(--rule-thickness) solid var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--baseline-half);
+  margin-top: var(--baseline-double);
+  padding-top: var(--baseline);
+}
+
+.booklet-chapter-end__stamp {
+  border: 1px var(--stamp-border-style) var(--stamp-border-color);
+  color: var(--stamp-color);
+  display: inline-block;
+  font-family: var(--font-marginalia);
+  font-size: var(--stamp-font-size);
+  letter-spacing: 0.1em;
+  padding: 0.2em 0.6em;
+  text-transform: uppercase;
+}
+
+/* Without JS or without IntersectionObserver: static, visible */
+.booklet-chapter-end__stamp.is-visible,
+.no-js .booklet-chapter-end__stamp {
+  opacity: 1;
+  transform: rotate(var(--stamp-rotation));
+}
+
+/* When JS + IntersectionObserver is available: reveal on scroll */
+.booklet-chapter-end__stamp {
+  opacity: 0;
+  transform: scale(0.85) rotate(0deg);
+  transition: opacity 0.6s ease 0.15s, transform 0.5s ease 0.15s;
+}
+
+.booklet-chapter-end__ornament {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+/* ── Foldable diagram ────────────────────────────────────────── */
+
+/* Details/summary panels below diagrams. Each panel corresponds to a
+   territory. Native HTML disclosure widget; JS syncs SVG clicks to panels. */
+.booklet-diagram-details {
+  margin-top: var(--baseline-double);
+}
+
+.booklet-diagram-details details {
+  border-bottom: var(--rule-thickness) solid var(--color-rule);
+}
+
+.booklet-diagram-details details:first-child {
+  border-top: var(--rule-thickness) solid var(--color-rule);
+}
+
+.booklet-diagram-details summary {
+  color: var(--color-ink);
+  cursor: pointer;
+  font-family: var(--font-text);
+  font-weight: var(--font-weight-semibold);
+  list-style: none;
+  padding: var(--baseline-half) 0;
+}
+
+.booklet-diagram-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.booklet-diagram-details summary::before {
+  color: var(--color-accent);
+  content: "▸";
+  display: inline-block;
+  font-size: var(--text-xs);
+  margin-right: var(--baseline-half);
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+.booklet-diagram-details details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.booklet-diagram-details .booklet-diagram-details__content {
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  padding: 0 var(--baseline) var(--baseline);
+}
+
+/* ── Reduced motion: disable all discovery transitions ──────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .booklet-marginalia--discovery {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .booklet-chapter-end__stamp {
+    opacity: 1;
+    transform: rotate(var(--stamp-rotation));
+    transition: none;
+  }
+
+  .booklet-diagram-details summary::before {
+    transition: none;
+  }
+}

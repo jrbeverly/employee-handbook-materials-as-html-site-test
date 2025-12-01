@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Caveat&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    />
+    {{ $tokens := resources.Get "css/tokens.css" | minify | fingerprint }}
+    {{ $site := resources.Get "css/site.css" | minify | fingerprint }}
+    {{ $layouts := resources.Get "css/layouts.css" | minify | fingerprint }}
+    {{ $discovery := resources.Get "css/discovery.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $tokens.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $site.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $layouts.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $discovery.RelPermalink }}" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <main id="main-content">{{ block "main" . }}{{ end }}</main>
+    {{ $discoveryJs := resources.Get "js/discovery.js" | minify | fingerprint }}
+    {{ $navJs := resources.Get "js/navigation.js" | minify | fingerprint }}
+    <script src="{{ $discoveryJs.RelPermalink }}" integrity="{{ $discoveryJs.Data.Integrity }}" defer></script>
+    <script src="{{ $navJs.RelPermalink }}" integrity="{{ $navJs.Data.Integrity }}" defer></script>
+  </body>
+</html>

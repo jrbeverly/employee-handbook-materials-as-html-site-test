@@ -1,0 +1,72 @@
+{{/*
+  Front matter validation — fail fast on authoring errors.
+  Called from single.html, list.html, and index.html for every page.
+
+  Produces a clear build error for:
+  - Missing or invalid page_form
+  - Missing required fields per page form
+  - Malformed array fields (diagram_details, marginalia)
+*/}}
+
+{{ $path := .File.Path | default "unknown" }}
+{{ $form := .Params.page_form | default "" }}
+{{ $validForms := slice "cover" "toc" "chapter-opener" "single-page" "spread" "full-bleed" "marginalia-heavy" }}
+
+{{/* Check page_form is set and valid */}}
+{{ if not $form }}
+  {{ errorf "front matter validation failed in %s: page_form is required (must be one of: %s)" $path (delimit $validForms ", ") }}
+{{ else }}
+  {{ $isValid := false }}
+  {{ range $validForms }}
+    {{ if eq . $form }}
+      {{ $isValid = true }}
+    {{ end }}
+  {{ end }}
+  {{ if not $isValid }}
+    {{ errorf "front matter validation failed in %s: invalid page_form %q (must be one of: %s)" $path $form (delimit $validForms ", ") }}
+  {{ end }}
+{{ end }}
+
+{{/* Form-specific required field checks */}}
+{{ if eq $form "spread" }}
+  {{ if not .Params.spread_left }}
+    {{ errorf "front matter validation failed in %s: spread_left is required for page_form: spread (title: %q)" $path .Title }}
+  {{ end }}
+{{ else if eq $form "full-bleed" }}
+  {{ $details := .Params.diagram_details }}
+  {{ if $details }}
+    {{ range $i, $d := $details }}
+      {{ if not (index $d "id") }}
+        {{ errorf "front matter validation failed in %s: diagram_details[%d] is missing required field 'id'" $path $i }}
+      {{ end }}
+      {{ if not (index $d "label") }}
+        {{ errorf "front matter validation failed in %s: diagram_details[%d] is missing required field 'label'" $path $i }}
+      {{ end }}
+      {{ if not (index $d "description") }}
+        {{ errorf "front matter validation failed in %s: diagram_details[%d] is missing required field 'description'" $path $i }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $form "marginalia-heavy" }}
+  {{ $items := .Params.marginalia }}
+  {{ if $items }}
+    {{ range $i, $m := $items }}
+      {{ if not (index $m "text") }}
+        {{ errorf "front matter validation failed in %s: marginalia[%d] is missing required field 'text'" $path $i }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Illustrations array validation */}}
+{{ $ills := .Params.illustrations }}
+{{ if $ills }}
+  {{ range $i, $ill := $ills }}
+    {{ if not (index $ill "name") }}
+      {{ errorf "front matter validation failed in %s: illustrations[%d] is missing required field 'name'" $path $i }}
+    {{ end }}
+    {{ if not (index $ill "alt") }}
+      {{ errorf "front matter validation failed in %s: illustrations[%d] is missing required field 'alt'" $path $i }}
+    {{ end }}
+  {{ end }}
+{{ end }}

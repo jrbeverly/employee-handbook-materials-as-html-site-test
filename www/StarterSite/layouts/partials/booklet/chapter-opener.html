@@ -1,0 +1,24 @@
+<div class="booklet-viewport">
+  <article class="booklet-page"{{ with .Params.page_number }} id="page-{{ . }}"{{ end }}>
+    {{ partial "booklet/running-header.html" (dict "section" .Params.section "chapter" .Params.chapter) }}
+    <div class="booklet-chapter-opener">
+      {{ with .Params.chapter_number }}
+      <p class="booklet-chapter-opener__number">Chapter {{ . }}</p>
+      {{ end }}
+      <h1 class="booklet-chapter-opener__title">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <div class="booklet-chapter-opener__description">
+        <p>{{ . }}</p>
+      </div>
+      {{ end }}
+      {{ partial "booklet/illustration-slot.html" . }}
+      {{ with .Content }}
+      <div class="booklet-content">
+        {{ . }}
+      </div>
+      {{ end }}
+    </div>
+    {{ partial "booklet/folio.html" . }}
+    {{ partial "booklet/page-footer.html" . }}
+  </article>
+</div>

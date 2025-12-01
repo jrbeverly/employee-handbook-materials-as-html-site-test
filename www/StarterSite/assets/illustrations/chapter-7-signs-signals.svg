@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 400 240"
+     role="img" aria-label="Visual glossary of handbook symbols: a stamp, a marginalia mark, a folio number, and a diagram key arranged as labeled reference entries">
+  <!-- Background panel -->
+  <rect x="20" y="15" width="360" height="210" rx="2"
+        fill="var(--color-paper)" stroke="var(--color-rule)" stroke-width="1" />
+
+  <!-- Title -->
+  <text x="200" y="42"
+        font-family="Crimson Pro, Georgia, serif" font-size="14"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">Key to Symbols</text>
+
+  <!-- Divider -->
+  <line x1="50" y1="52" x2="350" y2="52"
+        stroke="var(--color-rule)" stroke-width="1" />
+
+  <!-- Symbol 1: Stamp -->
+  <rect x="50" y="65" width="60" height="32" rx="2"
+        fill="none" stroke="var(--color-stamp)" stroke-width="1" stroke-dasharray="3,2" />
+  <text x="80" y="86"
+        font-family="Caveat, Georgia, serif" font-size="11"
+        fill="var(--color-stamp)" text-anchor="middle">OFFICIAL</text>
+  <text x="130" y="86"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink)" text-anchor="start">Stamp — marks an official item or edition</text>
+
+  <!-- Symbol 2: Marginalia -->
+  <text x="55" y="118"
+        font-family="Caveat, Georgia, serif" font-size="12"
+        fill="var(--color-notation)" text-anchor="start">↪ A marginal note</text>
+  <text x="130" y="118"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink)" text-anchor="start">Marginalia — authorial aside or pointer</text>
+
+  <!-- Symbol 3: Folio -->
+  <text x="80" y="148"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink-muted)" text-anchor="middle">— 7 —</text>
+  <text x="130" y="148"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink)" text-anchor="start">Folio — page number for navigation</text>
+
+  <!-- Symbol 4: Callout -->
+  <rect x="50" y="163" width="60" height="28" rx="1"
+        fill="var(--color-callout-bg)" stroke="var(--color-callout-border)" stroke-width="1" />
+  <text x="80" y="182"
+        font-family="Crimson Pro, Georgia, serif" font-size="10"
+        fill="var(--color-ink)" text-anchor="middle" font-weight="600">Note</text>
+  <text x="130" y="182"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink)" text-anchor="start">Callout — information that deserves a pause</text>
+
+  <!-- Symbol 5: Diagram node -->
+  <circle cx="80" cy="208" r="10"
+          fill="var(--color-diagram-fill)" stroke="var(--color-diagram-stroke)" stroke-width="1" />
+  <text x="130" y="212"
+        font-family="Crimson Pro, Georgia, serif" font-size="12"
+        fill="var(--color-ink)" text-anchor="start">Diagram — visual explanation of structure</text>
+</svg>

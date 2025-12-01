@@ -1,0 +1,5 @@
+{{ $text := .Get 0 | default (.Get "text") | default "" }}
+{{ $ornament := .Get "ornament" | default "❧" }}
+{{ if $text }}
+  {{ partial "booklet/chapter-end.html" (dict "text" $text "ornament" $ornament) }}
+{{ end }}

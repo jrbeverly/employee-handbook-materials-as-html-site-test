@@ -1,0 +1,11 @@
+baseURL = "/"
+relativeURLs = true
+locale = "en-US"
+title = "Field Guide"
+disableKinds = ["taxonomy", "term", "rss", "sitemap"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  description = "An employee handbook styled as a field guide to the organization."

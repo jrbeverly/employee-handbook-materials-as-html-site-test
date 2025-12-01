@@ -1,0 +1,6 @@
+{{ $text := trim .Inner " \n\r\t" }}
+{{ if $text }}
+<aside class="booklet-marginalia booklet-marginalia--inline" aria-label="Marginal note">
+  {{ $text | markdownify }}
+</aside>
+{{ end }}

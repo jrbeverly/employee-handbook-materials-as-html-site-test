@@ -1,0 +1,5 @@
+{{ $page := .Page }}
+{{ $num := $page.Params.page_number | default "" }}
+{{ if $num }}
+<div class="booklet-folio">&mdash; {{ $num }} &mdash;</div>
+{{ end }}

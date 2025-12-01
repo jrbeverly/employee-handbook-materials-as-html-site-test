@@ -1,0 +1,39 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_size = 4
+
+# Analyzer rule adjustments (AnalysisLevel=latest-all in Directory.Build.props).
+# Each suppression documents why the rule does not fit this codebase; everything
+# else stays at its default severity and fails the build via TreatWarningsAsErrors.
+
+# CA2007 (ConfigureAwait): ASP.NET Core and Lambda hosts have no
+# SynchronizationContext, so ConfigureAwait(false) is pure noise in app code.
+dotnet_diagnostic.CA2007.severity = none
+
+# CA1515 (make types internal): endpoint classes, DTOs, and services are the
+# application's deliberate public surface, consumed directly by the test project.
+dotnet_diagnostic.CA1515.severity = none
+
+[tests/**.cs]
+# CA1707 (no underscores in identifiers): test method names use the
+# Method_Scenario_Expectation convention.
+dotnet_diagnostic.CA1707.severity = none
+
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles and Visual Studio solution files require tab indentation.
+[{Makefile,*.mk}]
+indent_style = tab
+
+[*.sln]
+indent_style = tab

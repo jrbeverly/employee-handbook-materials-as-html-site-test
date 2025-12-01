@@ -1,0 +1,4 @@
+{{ $text := .text | default "" }}
+{{ if $text }}
+<span class="booklet-stamp" aria-label="{{ $text }}">{{ $text }}</span>
+{{ end }}

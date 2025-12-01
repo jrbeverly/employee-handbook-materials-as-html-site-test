@@ -1,0 +1,149 @@
+/* Handbook Design Tokens
+ *
+ * Every visual value in the handbook is a CSS custom property defined here.
+ * Templates and component styles reference tokens exclusively; magic numbers
+ * in templates are a regression.
+ *
+ * Source of truth: docs/vision/handbook-visual-language.md
+ *
+ * Naming: --<category>-<property>[-<variant>]
+ */
+
+:root {
+  /* ── Typography ─────────────────────────────────────────────── */
+
+  /* Text and display: Crimson Pro (Garamond-inspired serif).
+     Variable weight axis 200–900 covers all roles from marginalia to titles. */
+  --font-text: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+
+  /* Annotation and marginalia: Caveat (handwriting-adjacent).
+     Used only for marginalia, annotation asides, stamps — never body text. */
+  --font-marginalia: Caveat, 'Segoe Script', 'Comic Sans MS', cursive;
+
+  /* Monospace for diagrams, code-like content, technical asides */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+
+  /* Type scale (baseline: 1.5rem) */
+  --text-xs:     0.75rem;    /* marginalia, stamps, folios             */
+  --text-sm:     0.875rem;   /* captions, asides, secondary content    */
+  --text-base:   1rem;       /* body text (16px at default zoom)       */
+  --text-md:     1.125rem;   /* lead paragraphs, intro copy            */
+  --text-lg:     1.5rem;     /* section headings                       */
+  --text-xl:     2rem;       /* major section titles                   */
+  --text-2xl:    2.5rem;     /* chapter titles                         */
+  --text-3xl:    3.5rem;     /* plate titles, front matter             */
+
+  --font-weight-normal:  400;
+  --font-weight-medium:  500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:    700;
+
+  /* Leading */
+  --leading-snug:     1.3;
+  --leading-base:     1.5;
+  --leading-relaxed:  1.65;
+
+  /* ── Palette ─────────────────────────────────────────────────── */
+
+  /* Core: ink on paper */
+  --color-paper:      #f5f1e8;   /* warm cream page background           */
+  --color-ink:        #1e1a16;   /* dark brown-black primary text        */
+  --color-ink-muted:  #5c5650;   /* secondary text, captions, folios     */
+
+  /* Accent */
+  --color-accent:        #4a6741;  /* muted sage/forest green            */
+  --color-accent-light:  #dce8d6;  /* tinted background for accent areas */
+  --color-focus:        var(--color-accent);  /* focus ring, defaults to accent */
+
+  /* Stamp */
+  --color-stamp:      #3a5070;   /* faded navy — ink-stamp blue          */
+
+  /* Annotation and marginalia */
+  --color-notation:   #b4512e;   /* terracotta red — red pencil (AA 4.5:1) */
+
+  /* Rules and borders */
+  --color-rule:       #d4c9b8;   /* warm tan for hairlines, borders      */
+
+  /* Diagram */
+  --color-diagram-line:  #8c8273;  /* warm grey stroke, recedes from ink */
+  --color-diagram-fill:  #e6e0d5;  /* subtle fill distinct from paper    */
+
+  /* Callout */
+  --color-callout-bg:      #faf7f0;  /* slightly lighter paper           */
+  --color-callout-border:  #d4c9b8;  /* same as rule                     */
+
+  /* Extended paper tones */
+  --color-paper-dark:  #e8e0d0;  /* alternate paper for callouts, asides */
+
+  /* ── Page Geometry ───────────────────────────────────────────── */
+
+  --page-width:         36rem;    /* compact field-guide proportion      */
+  --page-min-height:    48rem;    /* minimum page depth                  */
+
+  /* Margins (right page shown; left page mirrors via selector) */
+  --page-padding-top:    3rem;
+  --page-padding-bottom: 3rem;
+  --page-padding-left:   2.5rem;  /* inner margin (spine side)           */
+  --page-padding-right:  1.5rem;  /* outer margin (marginalia extends in)*/
+
+  /* ── Spread ──────────────────────────────────────────────────── */
+
+  --spread-gap:         2rem;     /* visible division between pages      */
+  --spread-max-width:   calc(2 * var(--page-width) + var(--spread-gap));
+  --spread-content-max: 62rem;    /* content spanning both pages         */
+
+  /* ── Baseline Rhythm ──────────────────────────────────────────── */
+
+  --baseline:       1.5rem;
+  --baseline-half:  0.75rem;
+  --baseline-double: 3rem;
+
+  /* ── Marginalia ───────────────────────────────────────────────── */
+
+  --marginalia-width:   10rem;
+  --marginalia-offset:  1rem;
+  --marginalia-font-size: var(--text-xs);
+  --marginalia-color:     var(--color-notation);
+  --marginalia-leading:   var(--leading-snug);
+
+  /* ── Folio ────────────────────────────────────────────────────── */
+
+  --folio-font-size: var(--text-xs);
+  --folio-color:     var(--color-ink-muted);
+
+  /* ── Running Header ───────────────────────────────────────────── */
+
+  --running-header-font-size: var(--text-sm);
+  --running-header-color:     var(--color-ink-muted);
+
+  /* ── Stamp ────────────────────────────────────────────────────── */
+
+  --stamp-color:        var(--color-stamp);
+  --stamp-border-color: var(--color-stamp);
+  --stamp-border-style: dashed;
+  --stamp-font-size:    var(--text-xs);
+  --stamp-rotation:     -3deg;
+
+  /* ── Callout ──────────────────────────────────────────────────── */
+
+  --callout-bg:      var(--color-callout-bg);
+  --callout-border:  var(--color-callout-border);
+  --callout-padding: var(--baseline);
+
+  /* ── Rule / Ornament ──────────────────────────────────────────── */
+
+  --rule-color:     var(--color-rule);
+  --rule-thickness: 1px;
+
+  /* ── Diagram ──────────────────────────────────────────────────── */
+
+  --diagram-stroke:          var(--color-diagram-line);
+  --diagram-fill:            var(--color-diagram-fill);
+  --diagram-stroke-width:     1.5px;
+  --diagram-stroke-width-thin: 1px;
+
+  /* ── Content Measure ──────────────────────────────────────────── */
+
+  --content-width:   30rem;     /* available width after page padding    */
+  --content-measure: 28rem;     /* max prose line length (65–75 chars)   */
+}

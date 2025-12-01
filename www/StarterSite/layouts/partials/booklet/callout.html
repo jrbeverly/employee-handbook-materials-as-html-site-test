@@ -1,0 +1,6 @@
+{{ $text := .text | default "" }}
+{{ if $text }}
+<aside class="booklet-callout" role="note">
+  <p>{{ $text | markdownify }}</p>
+</aside>
+{{ end }}

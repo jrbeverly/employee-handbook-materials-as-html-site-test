@@ -1,0 +1,18 @@
+{{ $marginalia := .Params.marginalia | default slice }}
+<div class="booklet-viewport">
+  <article class="booklet-page booklet-page--marginalia"{{ with .Params.page_number }} id="page-{{ . }}"{{ end }}>
+    <div>
+      {{ partial "booklet/running-header.html" (dict "section" .Params.section "chapter" .Params.chapter) }}
+      <div class="booklet-content">
+        {{ with .Title }}
+        <h1>{{ . }}</h1>
+        {{ end }}
+        {{ partial "booklet/illustration-slot.html" . }}
+        {{ .Content }}
+      </div>
+    </div>
+    {{ partial "booklet/marginalia.html" (dict "items" $marginalia) }}
+    {{ partial "booklet/folio.html" . }}
+    {{ partial "booklet/page-footer.html" . }}
+  </article>
+</div>

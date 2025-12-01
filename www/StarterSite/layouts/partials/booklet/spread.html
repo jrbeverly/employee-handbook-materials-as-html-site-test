@@ -1,0 +1,27 @@
+{{ $left := .Params.spread_left | default "" }}
+{{ $rightContent := .Content }}
+<div class="booklet-viewport"{{ with .Params.page_number }} id="page-{{ . }}"{{ end }}>
+  <div class="booklet-spread">
+    <article class="booklet-spread__page booklet-spread__page--left">
+      {{ partial "booklet/running-header.html" (dict "section" .Params.section "chapter" .Params.left_chapter) }}
+      <div class="booklet-content">
+        {{ $left | markdownify }}
+      </div>
+      {{ with .Params.left_page_number }}
+      <div class="booklet-folio">&mdash; {{ . }} &mdash;</div>
+      {{ end }}
+    </article>
+    <article class="booklet-spread__page">
+      {{ partial "booklet/running-header.html" (dict "section" .Params.section "chapter" .Params.chapter) }}
+      <div class="booklet-content">
+        {{ with .Title }}
+        <h1>{{ . }}</h1>
+        {{ end }}
+        {{ partial "booklet/illustration-slot.html" . }}
+        {{ $rightContent }}
+      </div>
+      {{ partial "booklet/folio.html" . }}
+    </article>
+  </div>
+  {{ partial "booklet/page-footer.html" . }}
+</div>

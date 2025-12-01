@@ -1,0 +1,8 @@
+{{ $text := .text | default "" }}
+{{ $ornament := .ornament | default "❧" }}
+{{ if $text }}
+<div class="booklet-chapter-end" aria-label="End of chapter">
+  <div class="booklet-chapter-end__ornament">{{ $ornament }}</div>
+  <div class="booklet-chapter-end__stamp">{{ $text }}</div>
+</div>
+{{ end }}

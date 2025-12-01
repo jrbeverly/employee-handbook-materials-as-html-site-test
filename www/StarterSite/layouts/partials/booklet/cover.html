@@ -1,0 +1,22 @@
+<div class="booklet-viewport">
+  <article class="booklet-page">
+    <div class="booklet-cover">
+      <div class="booklet-cover__stamp">
+        {{ partial "booklet/stamp.html" (dict "text" .Params.stamp) }}
+      </div>
+      <h1 class="booklet-cover__title">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+      <p class="booklet-cover__subtitle">{{ . }}</p>
+      {{ end }}
+      {{ partial "booklet/illustration-slot.html" . }}
+      {{ with .Content }}
+      <div class="booklet-content">
+        {{ . }}
+      </div>
+      {{ end }}
+    </div>
+    {{ with site.GetPage "/handbook" }}
+    <a href="{{ .RelPermalink }}" class="booklet-cover__enter" data-next-url="{{ .RelPermalink }}">Open the Field Guide &rarr;</a>
+    {{ end }}
+  </article>
+</div>

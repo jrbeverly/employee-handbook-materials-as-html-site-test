@@ -1,0 +1,4 @@
+{{ $text := .Get 0 | default (.Get "text") | default "" }}
+{{ if $text }}
+  {{ partial "booklet/stamp.html" (dict "text" $text) }}
+{{ end }}

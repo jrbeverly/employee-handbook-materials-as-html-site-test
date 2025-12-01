@@ -1,0 +1,25 @@
+{{/*
+  Inline spot illustration shortcode.
+  Usage: {{< illustration name="weekly-cadence" alt="Weekly rhythm diagram" caption="Fig. 2 — The working week" >}}
+
+  Delegates to the same SVG lookup as the front-matter illustration slot.
+*/}}
+
+{{ $name := .Get "name" | default (.Get 0) | default "" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $caption := .Get "caption" | default "" }}
+
+{{ if $name }}
+  {{ $svgPath := printf "illustrations/%s.svg" $name }}
+  {{ $svg := resources.Get $svgPath }}
+  {{ if $svg }}
+    <figure class="booklet-illustration" role="img" aria-label="{{ $alt }}">
+      {{ $svg.Content | safeHTML }}
+      {{ if $caption }}
+      <figcaption class="booklet-illustration__caption">{{ $caption | markdownify }}</figcaption>
+      {{ end }}
+    </figure>
+  {{ else }}
+    {{ errorf "illustration shortcode: %q not found at assets/%s" $name $svgPath }}
+  {{ end }}
+{{ end }}

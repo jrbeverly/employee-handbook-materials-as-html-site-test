@@ -1,0 +1,2 @@
+{{ $ornament := .Get 0 | default (.Get "symbol") | default "*" }}
+{{ partial "booklet/rule.html" (dict "ornament" $ornament) }}
